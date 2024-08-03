@@ -7,7 +7,7 @@ import AppContent from './AppContent';
 function App() {
   return (
     <div className="App">
-      <Header pageTitle="TeachingTrackingEvaluation_FPolyTTE" logoSrc={logo} />
+      <Header pageTitle="FPoly CellPhone" logoSrc={logo} />
       <div className="container-fluid">
         <div className="row">
           <div className="col">

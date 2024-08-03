@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Teacher from './Teacher'; 
+import Phone from './Phone'; 
 import { request, setAuthHeader } from '../helpers/axios_helper';
 
 const AuthContent = ({ token }) => {
@@ -31,7 +31,7 @@ const AuthContent = ({ token }) => {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 {token ? (
-                    <Teacher />
+                    <Phone />
                 ) : (
                     <h1>Xin mời đăng nhập</h1>
                 )}
