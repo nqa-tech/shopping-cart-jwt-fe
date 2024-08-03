@@ -1,7 +1,7 @@
 import React from 'react';
 import { Offcanvas, Button, Form } from 'react-bootstrap';
 
-const ShoppingCart = ({ showCart, setShowCart, cart, handleQuantityChange, handleCheckout }) => {
+const ShoppingCart = ({ showCart, setShowCart, cart, handleQuantityChange, handleRemoveItem, handleCheckout }) => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   };
@@ -27,6 +27,9 @@ const ShoppingCart = ({ showCart, setShowCart, cart, handleQuantityChange, handl
                 />
               </Form.Group>
               <p>Thành tiền: {formatCurrency(item.total)}</p>
+              <Button variant="danger" onClick={() => handleRemoveItem(item.id)}>
+                Xóa
+              </Button>
               <hr />
             </div>
           ))

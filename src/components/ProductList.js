@@ -5,6 +5,8 @@ const ProductList = ({ phones, handleEditPhone, handleDeletePhone, handleAddToCa
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   };
 
+  const userRole = getUserRole();
+console.log(userRole);
   return (
     <div className="row">
       {phones && phones.length > 0 ? (
@@ -17,7 +19,7 @@ const ProductList = ({ phones, handleEditPhone, handleDeletePhone, handleAddToCa
                   <h5 className="card-title">{phone.tenSanPham}</h5>
                   <p className="card-text">Mã sản phẩm: {phone.maSanPham}</p>
                   <p className="card-text">Giá: {formatCurrency(phone.gia)}</p>
-                  {getUserRole() === 'admin' ? (
+                  {userRole === 'admin' ? (
                     <>
                       <button
                         onClick={() => handleEditPhone(phone)}
