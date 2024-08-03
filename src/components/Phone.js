@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
-import { jwtDecode } from 'jwt-decode'; // Correct the import here
+import {jwtDecode} from 'jwt-decode';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import ShoppingCart from './ShoppingCart'; // Import ShoppingCart component
-import ProductList from './ProductList'; // Import ProductList component
-import ProductForm from './ProductForm'; // Import ProductForm component
-import { saveCart, getCart, clearCart } from '../utils/cartStorage'; // Import cart storage utilities
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import ShoppingCart from './ShoppingCart';
+import ProductList from './ProductList';
+import ProductForm from './ProductForm';
+import { saveCart, getCart, clearCart } from '../utils/cartStorage';
 
 const Phone = () => {
   const token = localStorage.getItem('auth_token');
@@ -26,7 +26,7 @@ const Phone = () => {
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('Thêm sản phẩm');
-  const [showCart, setShowCart] = useState(false); // State to handle offcanvas visibility
+  const [showCart, setShowCart] = useState(false);
 
   const getAuthHeader = useCallback(() => {
     return { Authorization: `Bearer ${token}` };
@@ -126,6 +126,7 @@ const Phone = () => {
 
   const handleDeletePhone = async (id) => {
     const userRole = getUserRole();
+
     if (userRole !== 'admin') {
       toast.error('Bạn không có quyền thực hiện thao tác này.');
       return;
@@ -202,6 +203,13 @@ const Phone = () => {
     saveCart(updatedCart);
   };
 
+  const handleRemoveItem = (id) => {
+    const updatedCart = cart.filter(item => item.id !== id);
+    setCart(updatedCart);
+    saveCart(updatedCart);
+    toast.success('Đã xóa sản phẩm khỏi giỏ hàng!');
+  };
+
   const handleCheckout = async () => {
     const user = jwtDecode(token);
   
@@ -258,6 +266,7 @@ const Phone = () => {
       const sub = decodedToken.sub;
       if (sub) {
         const role = extractRole(sub);
+        console.log('Role:', role)
         return role;
       }
     }
@@ -323,6 +332,7 @@ const Phone = () => {
         setShowCart={setShowCart}
         cart={cart}
         handleQuantityChange={handleQuantityChange}
+        handleRemoveItem={handleRemoveItem}
         handleCheckout={handleCheckout}
       />
     </div>
