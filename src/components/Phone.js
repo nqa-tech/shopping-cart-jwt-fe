@@ -223,7 +223,7 @@ const Phone = () => {
   
     const orderDTO = {
       maDonHang: `DH${Date.now()}`,
-      trangThai: "PENDING",
+      trangThai: "SUCCESS",
       tongTien: cart.reduce((total, item) => total + item.total, 0),
       maKhachHang: maKhachHang, // Sử dụng id của người dùng
       items: cart.map(item => ({
